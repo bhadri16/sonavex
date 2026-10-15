@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SONAVEX — Directional Sound Alerts for Deaf and Hard-of-Hearing Workers</title>
+  <meta name="description" content="SONAVEX is a wearable device that detects the direction of warning sounds and delivers directional vibration alerts, helping deaf and hard-of-hearing workers stay safe on site." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a href="#" class="nav__logo" aria-label="SONAVEX home">SONAVEX</a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+      <ul id="nav-links" class="nav__links" role="list">
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#why-it-matters">Why it matters</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="btn btn--accent btn--sm">Request a demo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1 id="hero-heading" class="hero__heading">Feel which way the warning is coming from.</h1>
+          <p class="hero__sub">SONAVEX listens for warning sounds, works out their direction, and taps it out as vibration.</p>
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn--accent">Request a demo</a>
+            <a href="#how-it-works" class="btn btn--outline">See how it works</a>
+          </div>
+          <p class="hero__tagline label">Built at Sri Sairam Engineering College, Chennai</p>
+        </div>
+
+        <!-- Interactive demo -->
+        <div class="demo" aria-label="Interactive concept illustration of SONAVEX directional alert system" role="figure">
+          <div class="demo__svg-wrap">
+            <svg id="demo-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <!-- Outer ring -->
+              <circle cx="170" cy="170" r="155" fill="none" stroke="var(--clr-border)" stroke-width="1.5" stroke-dasharray="6 4" />
+              <!-- Person silhouette (simple top-down) -->
+              <circle cx="170" cy="155" r="22" fill="var(--clr-person)" />
+              <ellipse cx="170" cy="195" rx="18" ry="26" fill="var(--clr-person)" />
+              <!-- Direction label -->
+              <text x="170" y="115" text-anchor="middle" class="demo-label" fill="var(--clr-muted)">Front</text>
+              <text x="170" y="275" text-anchor="middle" class="demo-label" fill="var(--clr-muted)">Back</text>
+              <text x="45" y="175" text-anchor="middle" class="demo-label" fill="var(--clr-muted)">Left</text>
+              <text x="295" y="175" text-anchor="middle" class="demo-label" fill="var(--clr-muted)">Right</text>
+
+              <!-- 8 motors (small circles on ring) -->
+              <g id="motors">
+                <!-- 0: Front -->
+                <circle data-motor="0" cx="170" cy="25"  r="8" class="motor" />
+                <!-- 1: Front-right -->
+                <circle data-motor="1" cx="272" cy="68"  r="8" class="motor" />
+                <!-- 2: Right -->
+                <circle data-motor="2" cx="315" cy="170" r="8" class="motor" />
+                <!-- 3: Back-right -->
+                <circle data-motor="3" cx="272" cy="272" r="8" class="motor" />
+                <!-- 4: Back -->
+                <circle data-motor="4" cx="170" cy="315" r="8" class="motor" />
+                <!-- 5: Back-left -->
+                <circle data-motor="5" cx="68"  cy="272" r="8" class="motor" />
+                <!-- 6: Left -->
+                <circle data-motor="6" cx="25"  cy="170" r="8" class="motor" />
+                <!-- 7: Front-left -->
+                <circle data-motor="7" cx="68"  cy="68"  r="8" class="motor" />
+              </g>
+
+              <!-- Sound-source indicator (moves) -->
+              <g id="sound-source">
+                <circle id="sound-dot" cx="170" cy="25" r="14" class="sound-dot" />
+                <text id="sound-icon" x="170" y="30" text-anchor="middle" class="sound-icon" fill="#fff">&#9835;</text>
+              </g>
+
+              <!-- 8 clickable zones (invisible wedges) -->
+              <g id="click-zones">
+                <path data-zone="0" d="M170,170 L132,20  A155,155 0 0,1 208,20  Z"  class="zone" tabindex="0" role="button" aria-label="Front" />
+                <path data-zone="1" d="M170,170 L208,20  A155,155 0 0,1 315,68  Z"  class="zone" tabindex="0" role="button" aria-label="Front right" />
+                <path data-zone="2" d="M170,170 L315,68  A155,155 0 0,1 315,272 Z"  class="zone" tabindex="0" role="button" aria-label="Right" />
+                <path data-zone="3" d="M170,170 L315,272 A155,155 0 0,1 208,320 Z"  class="zone" tabindex="0" role="button" aria-label="Back right" />
+                <path data-zone="4" d="M170,170 L208,320 A155,155 0 0,1 132,320 Z"  class="zone" tabindex="0" role="button" aria-label="Back" />
+                <path data-zone="5" d="M170,170 L132,320 A155,155 0 0,1 25,272  Z"  class="zone" tabindex="0" role="button" aria-label="Back left" />
+                <path data-zone="6" d="M170,170 L25,272  A155,155 0 0,1 25,68   Z"  class="zone" tabindex="0" role="button" aria-label="Left" />
+                <path data-zone="7" d="M170,170 L25,68   A155,155 0 0,1 132,20  Z"  class="zone" tabindex="0" role="button" aria-label="Front left" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- Sound-type chips -->
+          <div class="demo__chips" role="radiogroup" aria-label="Select sound type">
+            <button class="chip chip--active" data-sound="0" aria-pressed="true">Vehicle horn</button>
+            <button class="chip" data-sound="1" aria-pressed="false">Machine alarm</button>
+            <button class="chip" data-sound="2" aria-pressed="false">Emergency siren</button>
+            <button class="chip" data-sound="3" aria-pressed="false">Spoken call</button>
+          </div>
+
+          <!-- Readout -->
+          <div class="demo__readout" aria-live="polite">
+            <div class="readout-row"><span class="label">Sound</span> <span id="readout-sound">Vehicle horn</span></div>
+            <div class="readout-row"><span class="label">From</span> <span id="readout-dir">Front</span></div>
+            <div class="readout-row"><span class="label">Alert pattern</span> <span id="readout-pattern">2 short pulses</span></div>
+          </div>
+          <p class="demo__note label">Concept illustration. Vibration patterns are adjustable.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROBLEM + STATS ===== -->
+    <section id="why-it-matters" class="section section--alt" aria-labelledby="stats-heading">
+      <div class="container">
+        <h2 id="stats-heading" class="section__heading">Why it matters</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-card__number">1.5 B</span>
+            <p class="stat-card__text">people worldwide live with hearing loss</p>
+            <a class="stat-card__source label" href="https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss" target="_blank" rel="noopener noreferrer">Source: WHO</a>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">12 / 15</span>
+            <p class="stat-card__text">people we interviewed said this problem is important</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">10 / 15</span>
+            <p class="stat-card__text">were dissatisfied with the alternatives available today</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section id="how-it-works" class="section" aria-labelledby="hiw-heading">
+      <div class="container">
+        <h2 id="hiw-heading" class="section__heading">How it works</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num label" aria-hidden="true">01</span>
+            <h3 class="step__title">Listen</h3>
+            <p class="step__desc">MEMS microphones pick up ambient warning sounds across the workspace.</p>
+          </li>
+          <li class="step">
+            <span class="step__num label" aria-hidden="true">02</span>
+            <h3 class="step__title">Locate</h3>
+            <p class="step__desc">An ESP32 microcontroller runs audio signal processing to estimate the direction the sound is coming from.</p>
+          </li>
+          <li class="step">
+            <span class="step__num label" aria-hidden="true">03</span>
+            <h3 class="step__title">Alert</h3>
+            <p class="step__desc">Vibration motors on a wearable band fire in the matching direction. An optional OLED display adds a visual warning.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section id="features" class="section section--alt" aria-labelledby="features-heading">
+      <div class="container">
+        <h2 id="features-heading" class="section__heading">Key features</h2>
+        <ul class="features-list" role="list">
+          <li class="feature">
+            <h3 class="feature__title">Sound-direction estimation</h3>
+            <p>Multiple MEMS microphones and signal processing determine where a warning sound originates.</p>
+          </li>
+          <li class="feature">
+            <h3 class="feature__title">Directional vibration alerts</h3>
+            <p>A ring of vibration motors taps the side the sound is coming from, giving an intuitive spatial cue.</p>
+          </li>
+          <li class="feature">
+            <h3 class="feature__title">Visual warnings</h3>
+            <p>An optional OLED screen shows the sound type and direction for workers who prefer a visual reference.</p>
+          </li>
+          <li class="feature">
+            <h3 class="feature__title">Adjustable vibration patterns</h3>
+            <p>Different sounds map to distinct vibration rhythms, so the wearer can tell a horn from a siren by feel.</p>
+          </li>
+          <li class="feature">
+            <h3 class="feature__title">Lightweight and rechargeable</h3>
+            <p>Designed to be worn comfortably through a full shift and recharged overnight via USB-C.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== COMPARISON TABLE ===== -->
+    <section class="section" aria-labelledby="compare-heading">
+      <div class="container">
+        <h2 id="compare-heading" class="section__heading">What changes with SONAVEX</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Comparison table, scroll horizontally if needed">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Today</th>
+                <th scope="col">Where it falls short</th>
+                <th scope="col">With SONAVEX</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Flashing lights / visual alarms</td>
+                <td>Only useful if you happen to be looking that way</td>
+                <td>Vibration tells you the direction even when you are not looking</td>
+              </tr>
+              <tr>
+                <td>Hand signals</td>
+                <td>Need line of sight and a co-worker nearby</td>
+                <td>Works independently, no co-worker needed</td>
+              </tr>
+              <tr>
+                <td>Written messages</td>
+                <td>Slow, not practical in an emergency</td>
+                <td>Alert is instant and hands-free</td>
+              </tr>
+              <tr>
+                <td>Smartphone alerts</td>
+                <td>Phone may be in a pocket; no directional info</td>
+                <td>Worn on the body with directional cues</td>
+              </tr>
+              <tr>
+                <td>Help from colleagues</td>
+                <td>Relies on someone else noticing in time</td>
+                <td>Wearer gets the alert directly, every time</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BENEFITS ===== -->
+    <section class="section section--alt" aria-labelledby="benefits-heading">
+      <div class="container">
+        <h2 id="benefits-heading" class="section__heading">What it means for you</h2>
+        <div class="benefits-grid">
+          <div class="benefit">
+            <h3 class="benefit__title">Safer</h3>
+            <p>Workers receive immediate, directional alerts they can feel, reducing response time to hazards.</p>
+          </div>
+          <div class="benefit">
+            <h3 class="benefit__title">More confident</h3>
+            <p>Knowing you will be alerted lets you focus on your work instead of constantly scanning your surroundings.</p>
+          </div>
+          <div class="benefit">
+            <h3 class="benefit__title">Included</h3>
+            <p>A shared safety system means deaf and hard-of-hearing workers operate under the same safety net as everyone else.</p>
+          </div>
+        </div>
+        <p class="benefits__footnote">Rechargeable, repairable design means less e-waste over the product lifecycle.</p>
+      </div>
+    </section>
+
+    <!-- ===== WHO IT'S FOR ===== -->
+    <section class="section" aria-labelledby="audience-heading">
+      <div class="container">
+        <h2 id="audience-heading" class="section__heading">Who it's for</h2>
+        <div class="audience-grid">
+          <div class="audience-card">
+            <h3 class="audience-card__title">Workers</h3>
+            <p>Deaf and hard-of-hearing individuals working in industrial plants, construction sites, and municipal sanitation operations.</p>
+          </div>
+          <div class="audience-card">
+            <h3 class="audience-card__title">Employers</h3>
+            <p>Factories, construction firms, and municipal sanitation teams looking to improve on-site safety and comply with inclusive workplace standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT / CTA ===== -->
+    <section id="contact" class="section section--dark" aria-labelledby="contact-heading">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h2 id="contact-heading" class="section__heading section__heading--light">Bring SONAVEX to your worksite.</h2>
+          <div class="contact-info__actions">
+            <a href="#contact-form" class="btn btn--accent">Request a demo</a>
+            <a href="#contact-form" class="btn btn--outline-light">Become a pilot partner</a>
+          </div>
+          <address class="contact-details">
+            <p><strong>Team SONAVEX</strong></p>
+            <p>Sri Sairam Engineering College<br />Chennai, Tamil Nadu</p>
+            <p><a href="mailto:sonavex@example.com">[EMAIL]</a></p>
+            <p><a href="tel:+910000000000">[PHONE]</a></p>
+          </address>
+        </div>
+
+        <form id="contact-form" class="contact-form" novalidate aria-label="Contact form">
+          <div class="form-group">
+            <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+            <input id="cf-name" name="name" type="text" required autocomplete="name" />
+            <span class="form-error" id="cf-name-err" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="cf-org">Organisation</label>
+            <input id="cf-org" name="organisation" type="text" autocomplete="organization" />
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email <span aria-hidden="true">*</span></label>
+            <input id="cf-email" name="email" type="email" required autocomplete="email" />
+            <span class="form-error" id="cf-email-err" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="cf-msg">Message <span aria-hidden="true">*</span></label>
+            <textarea id="cf-msg" name="message" rows="4" required></textarea>
+            <span class="form-error" id="cf-msg-err" role="alert"></span>
+          </div>
+          <button type="submit" class="btn btn--accent btn--full">Send message</button>
+          <div id="form-success" class="form-success" role="status" hidden>
+            Thanks! We have received your message and will get back to you soon.
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Ignite Venture project &middot; Sri Sairam Engineering College</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
